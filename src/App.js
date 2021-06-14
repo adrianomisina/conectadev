@@ -1,11 +1,20 @@
 import React from 'react'
-import Home from './pages/Home/index.js'
 import { ThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import SignIn from './pages/SignIn/index.js';
+import Home from './pages/Home/index.js'
 import theme from './theme'
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Home/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="*" element={<h1>Not found 404!</h1>} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

@@ -21,10 +21,10 @@ const posts= [
             avatar: '/images/avatar/avatar_1.jpeg'
         },
 
-        title: "Criando a Obsekium Social Midia do Zero !!!",
+        title: "Criando a Conecta Dev Social Media do Zero !!!",
         date: "June 12, 2021",
-        description: "Qual a opinião de vcs sobre a rede do Obsekium?",
-        hashtags: "#porobsekium, #reactjs, #deubom, #vuejs, #nanodatatop, #top",
+        description: "Qual a opinião de vcs sobre a rede Conecta Dev?",
+        hashtags: "#javascript, #reactjs, #bootstrap, #vuejs, #frontend, #ux",
         image: "images/posts/post9.png"
     },
 
@@ -37,10 +37,10 @@ const posts= [
             avatar: '/images/avatar/avatar_1.jpeg'
         },
 
-        title: "O Melhor Sistema de Gestão de Notas e Documentos !!!",
+        title: "Gestão do Tempo Para os Estudos",
         date: "June 12, 2021",
-        description: "Opinião dos Clientes sobre o Sistema Obsekium:",
-        hashtags: "#porobsekium, #reactjs, #deubom, #vuejs, #nanodatatop, #top",
+        description: "Opinião dos Especialista sobre Gestão do Tempo na Programação",
+        hashtags: "#javascript, #reactjs, #bootstrap, #vuejs, #frontend, #ux",
         image: "images/posts/post8.png"
     },
 ];

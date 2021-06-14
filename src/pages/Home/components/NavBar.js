@@ -16,18 +16,22 @@ const useStyles = makeStyles((theme) =>({
 
     button: {
         width: '100%',
-        color: '#1565c0'
+        color: '#481963'
     },
+
+    subHeader: {
+        color: '#481963'
+    }
 }));
 
 //hard code tags
 const tags = [
- {id: 1, name: 'porobsekinum'},
- {id: 2, name: 'comprador10'},
- {id: 3, name: 'fornecedor10'},
- {id: 4, name: 'deuruim'},
- {id: 5, name: 'deubom'},
- {id: 6, name: 'top'}
+ {id: 1, name: 'javascript'},
+ {id: 2, name: 'reactjs'},
+ {id: 3, name: 'vuejs'},
+ {id: 4, name: 'html5'},
+ {id: 5, name: 'css3'},
+ {id: 6, name: 'ux'}
 ]
 
 function NavBar() {
@@ -35,7 +39,7 @@ function NavBar() {
     return (
         <Paper className={classes.root}>
             <Button variant="outlined" className={classes.button}><strong>Registrar Grátis</strong></Button>
-            <ListSubheader><strong>{`Tags em Alta`}</strong></ListSubheader>
+            <ListSubheader className={classes.subHeader}><strong>{`Tags em Alta`}</strong></ListSubheader>
             {
                 tags.map((item) =>(
                     <ListItem dense button key={`item-${item.id}-${item.name}`}>

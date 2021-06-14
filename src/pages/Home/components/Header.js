@@ -15,7 +15,8 @@ const useStyles = makeStyles ({
     },
 
     img: {
-        maxHeight: 55,
+        marginLeft:36,
+        maxHeight: 32,
     },
 
     grow: {

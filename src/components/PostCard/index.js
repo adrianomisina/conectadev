@@ -18,7 +18,8 @@ import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        marginRight:  theme.spacing(1)
     },
 
     subheader:{
@@ -37,19 +38,19 @@ const useStyles = makeStyles((theme) => ({
     },
 
     image: {
-        height: 300,
+        height: '100%',
         width: '100%',
-        maxWidth: '100%'
+        maxWidth:'660px'
     },
 
     content: {
-        padding: 0
+        padding: 0,
+
     },
 
     favorite: {
         marginLeft: 'auto'
     }
-
 }))
 function PostCard({post}) {
     const classes = useStyles();
@@ -82,12 +83,16 @@ function PostCard({post}) {
                  {post.hashtags}
                 </Typography>
 
-                <CardActionArea>
+                <CardActionArea className={classes.content}>
                     <img src={post.image} className={classes.image} alt="img"/>
                 </CardActionArea>
             </CardContent>
 
             <CardActions disableSpacing>
+                <IconButton aria-label="like" >
+                    <ThumbUpAltRoundedIcon />
+                </IconButton>
+
                 <IconButton aria-label="like">
                     <FavoriteIcon/>
                     <Typography
@@ -110,22 +115,9 @@ function PostCard({post}) {
                     </Typography>
                 </IconButton>
 
-
-
-                <div className={classes.favorite}>
-                    <IconButton aria-label="like" >
-                        <ThumbUpAltRoundedIcon />
-                    </IconButton>
-
-                    <IconButton aria-label="favorite" >
-                        <BookmarkIcon />
-                    </IconButton>
-
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                </div>
-
+                <IconButton aria-label="share">
+                    <ShareIcon />
+                </IconButton>
 
             </CardActions>
         </Card>
