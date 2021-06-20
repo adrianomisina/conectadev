@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn/index.js';
 import Home from './pages/Home/index.js'
 import theme from './theme'
+
+import './mock';
 function App() {
   return (
     <ThemeProvider theme={theme}>

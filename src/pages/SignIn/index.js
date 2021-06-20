@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+// @ts-nocheck
+
+import React, {useState} from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { AlignCenter, Columns, FileText } from 'react-feather';
 import Typography from '@material-ui/core/Typography';
@@ -10,10 +13,12 @@ import LockOutlineIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
+import { useNavigate } from 'react-router-dom';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
+import authService from '../../services/authService.js';
 const useStyles = makeStyles((theme) => ({
     root: {
-        // display: 'flex',
-        // flexDirection: 'row',
         height: '100vh'
     },
 
@@ -23,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
     avatar: {
         background: '#6a1b9a',
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
         display:'flex',
         flexDirection:'column',
@@ -37,37 +42,47 @@ const useStyles = makeStyles((theme) => ({
     },
 
     form : {
-        margin: theme.spacing(0, 4)
+        margin: theme.spacing(2, 4)
+    },
+
+    link: {
+        cursor:'pointer'
     }
+}));
 
-    // left: {
-    //     background: 'purple',
-    //     // flexGrow:0, por default é zero
-    //     flexBasis:'58%',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     alignItems:'center',
-    //     color:'#fff'
-
-    // },
-
-    // right: {
-    //     background: 'yellow',
-    //     // flexGrow:0, por default é zero
-    //     flexBasis:'42%'
-    // },
-
-    // form: {
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     margin:'64px 32px',
-    //     alignItems: 'center'
-    // }
-}))
+function Copyright() {
+    return (
+        <Typography variant="body2" align="center">
+            {'Copyright ©'}
+        <a color="inherit" href="https://github.com/adrianomisina">
+            Adriano Misina
+        </a>{' '}
+        {new Date().getFullYear()}
+        </Typography>
+    )
+}
 function SignIn() {
     const classes = useStyles();
-    //Flex Container
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState();
+    async function handleSingnIn() {
+        //chamada a API da nossa aplicação
+        //se retorno retorno oh, direciona para home
+        //senao exibi mensagem para o usuario
+
+        try {
+            await authService.signIn(email, password)
+            navigate('/');
+        } catch(error) {
+          setErrorMessage(error.response.data.message);
+        }
+
+
+    }
+
+
     return (
         <Grid container className={classes.root}>
             <Grid className={classes.gridLeft}
@@ -86,8 +101,12 @@ function SignIn() {
                 </Typography>
             </Grid>
 
-            <Grid item md={5}>
-                <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
+            <Grid item md={5}
+                container
+                direction="column"
+                justify="center"
+                alignItems="center">
+                <Box display="flex" flexDirection="column" alignItems="center">
                     <Avatar className={classes.avatar}>
                         <LockOutlineIcon />
                     </Avatar>
@@ -106,6 +125,8 @@ function SignIn() {
                          name="email"
                          autoComplete="email"
                          autoFocus
+                         value={email}
+                         onChange={(event) => setEmail(event.target.value)}
                         />
 
                         <TextField
@@ -118,6 +139,8 @@ function SignIn() {
                          type="password"
                          id="password"
                          autoComplete="current-password"
+                         value={password}
+                         onChange={(event) => setPassword(event.target.value)}
                         />
 
                         <Button
@@ -125,52 +148,40 @@ function SignIn() {
                             fullWidth
                             variant="contained"
                             color="primary"
+                            onClick={handleSingnIn}
                         >
                          Entrar
                         </Button>
-
-                        <Grid container>
+                        {
+                            errorMessage &&
+                            <FormHelperText error>
+                                <strong>{errorMessage}</strong>
+                            </FormHelperText>
+                        }
+                        <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center">
                             <Grid item>
-                                <Link>
+                                <Link className={classes.link}>
                                     Esqueceu sua senha ?
                                 </Link>
                             </Grid>
 
 
                             <Grid item>
-                                <Link>
+                                <Link className={classes.link}>
                                     Não tem uma conta? Registre-se
                                 </Link>
                             </Grid>
                         </Grid>
-
-
                     </form>
+                    <Copyright />
                 </Box>
             </Grid>
         </Grid>
     )
-        // <div className={classes.root}>
-
-        //     <div className={classes.left}>
-        //         <Typography style={{color:'#fff', fontSize:35, lineHeight:'45px'}}>
-        //             <strong>Conecta Dev :)</strong>
-        //         </Typography>
-
-        //         <Typography variant="body2" style={{color:'rgb(255, 255, 255 0.7)', marginTop:30, fontSize:'15'}}>
-        //          Compartilhe seus Conhecimentos com toda nossa rede de Desenvolvedores
-        //         </Typography>
-        //     </div>
-
-        //     <div className={classes.right}>
-        //         <form className={classes.form}>
-        //             <h4>Acesso</h4>
-        //             <input type="text"></input>
-        //             <input type="text"></input>
-        //         </form>
-        //     </div>
-        // </div>
-
 }
 
 export default SignIn;
